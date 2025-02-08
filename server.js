@@ -18,6 +18,8 @@ app.use("/user/add", require("./routes/add"));
 app.use("/user/login", require("./routes/login"));
 //logout
 app.use("/user/logout", require("./routes/logout"));
+//delete user
+app.use("/user/delete", require("./routes/delete"));
 
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {
