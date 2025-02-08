@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const sha256 = require("sha256");
+const validator = require("validator");
 const { getRandom } = require("../utils.js");
 const connectMySQL = require("../mysql/driver.js");
 const { findUser, addToken } = require("../mysql/queries/account");
@@ -9,13 +10,16 @@ router.post("/", async (req, res) => {
   let { email, password } = req.body;
 
   if (!password) {
-    res.send({ status: 0, reason: "Missing passsword" });
-    return;
+    return res.send({ status: 0, reason: "Missing passsword" });
   }
 
   if (!email) {
-    res.send({ status: 0, reason: "Missing email" });
-    return;
+    return res.send({ status: 0, reason: "Missing email" });
+  }
+
+  //validate email
+  if (!validator.isEmail(email)) {
+    return res.send({ status: 0, reason: "Invalid Email" });
   }
 
   //hash password
@@ -38,7 +42,7 @@ router.post("/", async (req, res) => {
       await connectMySQL(addToken, [results[0].id, token]);
       res.send({ status: 1, token, email: results[0].email });
     } catch (e) {
-        console.log(e)
+      console.log(e);
       res.send({ status: 0, reason: "Can't login" });
       return;
     }

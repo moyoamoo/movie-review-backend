@@ -22,6 +22,8 @@ app.use("/user/logout", require("./routes/logout"));
 app.use("/user/delete", require("./routes/delete"));
 //change password
 app.use("/user/updatepassword", require("./routes/updatePassword"));
+//change email
+app.use("/user/updateemail", require("./routes/updateEmail"));
 
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {

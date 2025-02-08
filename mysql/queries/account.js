@@ -28,6 +28,10 @@ const updatePassword = `UPDATE users
                             SET password = ?
                               WHERE sessions.token = ?;`;
 
+const updateEmail = `UPDATE users
+                      JOIN sessions ON users.id = sessions.user_id
+                        SET email = ?
+                          WHERE sessions.token = ?;`;
 
 module.exports = {
   addUser,
@@ -36,5 +40,6 @@ module.exports = {
   checkToken,
   deleteUser,
   deleteToken,
-  updatePassword
+  updatePassword,
+  updateEmail,
 };
