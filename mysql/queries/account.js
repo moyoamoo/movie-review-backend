@@ -23,6 +23,12 @@ const deleteUser = `DELETE users, sessions FROM users
                       JOIN sessions ON users.id = sessions.user_id
                         WHERE token = ?`;
 
+const updatePassword = `UPDATE users
+                          JOIN sessions ON users.id = sessions.user_id
+                            SET password = ?
+                              WHERE sessions.token = ?;`;
+
+
 module.exports = {
   addUser,
   findUser,
@@ -30,4 +36,5 @@ module.exports = {
   checkToken,
   deleteUser,
   deleteToken,
+  updatePassword
 };

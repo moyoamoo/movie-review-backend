@@ -20,6 +20,8 @@ app.use("/user/login", require("./routes/login"));
 app.use("/user/logout", require("./routes/logout"));
 //delete user
 app.use("/user/delete", require("./routes/delete"));
+//change password
+app.use("/user/updatepassword", require("./routes/updatePassword"));
 
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {
