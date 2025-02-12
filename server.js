@@ -25,6 +25,9 @@ app.use("/user/updatepassword", require("./routes/updatePassword"));
 //change email
 app.use("/user/updateemail", require("./routes/updateEmail"));
 
+//change email
+app.use("/books/search", require("./routes/search"));
+
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);

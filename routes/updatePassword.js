@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const sha256 = require("sha256");
+const { salt } = require("../config");
 const { checkUser } = require("../middleware");
 const connectMySQL = require("../mysql/driver");
 const { updatePassword } = require("../mysql/queries/account");
@@ -13,7 +14,7 @@ router.patch("/", checkUser, async (req, res) => {
     return res.send({ status: 0, reason: "Missing password" });
   }
 
-  let hashedPassword = sha256(password + process.env.SALT);
+  let hashedPassword = sha256(password + salt);
 
   try {
     results = await connectMySQL(updatePassword, [

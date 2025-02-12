@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const sha256 = require("sha256");
+const { salt } = require("../config");
 const { getRandom } = require("../utils");
 const connectMySQL = require("../mysql/driver");
 const { addUser, addToken } = require("../mysql/queries/account");
@@ -19,7 +20,7 @@ router.post("/", async (req, res) => {
   }
 
   //hash password
-  password = sha256(password + process.env.SALT);
+  password = sha256(password + salt);
 
   //generate  token
   const token = getRandom();
