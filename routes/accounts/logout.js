@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { checkUser } = require("../middleware");
-const connectMySQL = require("../mysql/driver");
-const { deleteToken } = require("../mysql/queries/account");
+const { checkUser } = require("../../middleware");
+const connectMySQL = require("../../mysql/driver");
+const { deleteToken } = require("../../mysql/queries/account");
 
 router.delete("/", checkUser, async (req, res) => {
   console.log(deleteToken);

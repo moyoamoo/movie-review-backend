@@ -6,6 +6,10 @@ const { url } = require("../config");
 router.get("/", async (req, res) => {
   let { searchTerm } = req.body;
 
+  if (!searchTerm) {
+    return res.send({ status: 0, reason: "No search term" });
+  }
+
   try {
     const { data } = await axios.get(url(searchTerm));
     res.send({ status: 1, data: data });

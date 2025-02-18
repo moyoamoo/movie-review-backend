@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const sha256 = require("sha256");
-const { salt } = require("../config");
-const { checkUser } = require("../middleware");
-const connectMySQL = require("../mysql/driver");
-const { updatePassword } = require("../mysql/queries/account");
+const { salt } = require("../../config");
+const { checkUser } = require("../../middleware");
+const connectMySQL = require("../../mysql/driver");
+const { updatePassword } = require("../../mysql/queries/account");
 
 router.patch("/", checkUser, async (req, res) => {
   const { password } = req.body;

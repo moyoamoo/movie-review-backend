@@ -13,20 +13,20 @@ app.use(express.json());
 app.use(helmet());
 
 //add user
-app.use("/user/add", require("./routes/add"));
+app.use("/user/add", require("./routes/accounts/add"));
 //login
-app.use("/user/login", require("./routes/login"));
+app.use("/user/login", require("./routes/accounts/login"));
 //logout
-app.use("/user/logout", require("./routes/logout"));
+app.use("/user/logout", require("./routes/accounts/logout"));
 //delete user
-app.use("/user/delete", require("./routes/delete"));
+app.use("/user/delete", require("./routes/accounts/delete"));
 //change password
-app.use("/user/updatepassword", require("./routes/updatePassword"));
+app.use("/user/updatepassword", require("./routes/accounts/updatePassword"));
 //change email
-app.use("/user/updateemail", require("./routes/updateEmail"));
+app.use("/user/updateemail", require("./routes/accounts/updateEmail"));
 
-//change email
-app.use("/books/search", require("./routes/search"));
+//
+app.use("/books/search/term", require("./routes/searchByTerm"));
 
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {

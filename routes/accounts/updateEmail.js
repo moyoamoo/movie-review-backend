@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const sha256 = require("sha256");
 const validator = require("validator");
-const { checkUser } = require("../middleware");
-const connectMySQL = require("../mysql/driver");
-const { updateEmail } = require("../mysql/queries/account");
+const { checkUser } = require("../../middleware");
+const connectMySQL = require("../../mysql/driver");
+const { updateEmail } = require("../../mysql/queries/account");
 
 router.patch("/", checkUser, async (req, res) => {
   const { email } = req.body;

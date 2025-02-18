@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const sha256 = require("sha256");
-const { salt } = require("../config");
+const { salt } = require("../../config");
 const validator = require("validator");
-const { getRandom } = require("../utils");
-const connectMySQL = require("../mysql/driver");
-const { addUser, addToken } = require("../mysql/queries/account");
+const { getRandom } = require("../../utils");
+const connectMySQL = require("../../mysql/driver");
+const { addUser, addToken } = require("../../mysql/queries/account");
 
 router.post("/", async (req, res) => {
   let { email, password, username } = req.body;
