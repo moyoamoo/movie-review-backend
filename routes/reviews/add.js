@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getRandom } = require("../../utils");
 const connectMySQL = require("../../mysql/driver");
-const { addNewReview } = require("../../mysql/queries/reviews");
+const { addNewReview, searchReviews } = require("../../mysql/queries/reviews");
 const { checkUser } = require("../../middleware");
 
 router.post("/", checkUser, async (req, res) => {
@@ -16,13 +15,36 @@ router.post("/", checkUser, async (req, res) => {
     return res.send({ status: 0, reason: "No review" });
   }
 
+  // if user is logged in
   if (req.authUserID) {
     try {
-      await connectMySQL(addNewReview, [req.authUserID, id, review]);
-      return res.send({ status: 1, reason: "Review added", review });
+      // Try searching for the review to check if the user has already reviewed the book
+      const results = await connectMySQL(searchReviews, [req.authUserID, id]);
+
+      if (results.length) {
+        return res.send({
+          status: 0,
+          reason: "User has already added a review for this book",
+        });
+      } else {
+        //change review to utf8 
+        review = Buffer.from(JSON.stringify(review), "utf8");
+
+        try {
+          // Try adding a new review for the book
+          await connectMySQL(addNewReview, [req.authUserID, id, review]);
+          return res.send({ status: 1, reason: "Review added", review });
+        } catch (e) {
+          console.log(e);
+          return res.send({ status: 0, reason: "Unable to add book review" });
+        }
+      }
     } catch (e) {
       console.log(e);
-      return res.send({ status: 0, reason: "Unable to add book review" });
+      return res.send({
+        status: 0,
+        reason: "Unable to search for book reviews",
+      });
     }
   } else {
     return res.send({ status: 0, reason: "Not logged in" });
