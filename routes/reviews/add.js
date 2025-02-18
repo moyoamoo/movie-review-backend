@@ -21,18 +21,20 @@ router.post("/", checkUser, async (req, res) => {
       // Try searching for the review to check if the user has already reviewed the book
       const results = await connectMySQL(searchReviews, [req.authUserID, id]);
 
+      //if there is a review for book
       if (results.length) {
         return res.send({
           status: 0,
           reason: "User has already added a review for this book",
         });
       } else {
-        //change review to utf8 
-        review = Buffer.from(JSON.stringify(review), "utf8");
+        //change review to utf8
+        review = Buffer.from(JSON.stringify(review), "utf8").toString("base64");
 
         try {
           // Try adding a new review for the book
           await connectMySQL(addNewReview, [req.authUserID, id, review]);
+          review = JSON.parse(Buffer.from(review, "base64").toString("utf8"));
           return res.send({ status: 1, reason: "Review added", review });
         } catch (e) {
           console.log(e);
