@@ -1,7 +1,7 @@
 const addUser = `INSERT INTO users
-                  (email, password)
+                  (email, username, password)
                     VALUES
-                      (?, ?);`;
+                      (?, ?, ?);`;
 
 const addToken = `INSERT INTO sessions
                     (user_id, token)

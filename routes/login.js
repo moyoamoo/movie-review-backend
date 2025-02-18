@@ -32,8 +32,7 @@ router.post("/", async (req, res) => {
   try {
     results = await connectMySQL(findUser, [email, password]);
   } catch (e) {
-    res.send({ status: 0, reason: "Can't find user" });
-    return;
+    return res.send({ status: 0, reason: "Can't find user" });
   }
 
   if (results.length > 0) {
@@ -41,14 +40,19 @@ router.post("/", async (req, res) => {
 
     try {
       await connectMySQL(addToken, [results[0].id, token]);
-      res.send({ status: 1, token, email: results[0].email });
+      console.log(results);
+      res.send({
+        status: 1,
+        token,
+        email: results[0].email,
+        username: results[0].username,
+      });
     } catch (e) {
       console.log(e);
-      res.send({ status: 0, reason: "Can't login" });
-      return;
+      return res.send({ status: 0, reason: "Can't login" });
     }
   } else {
-    res.send({ status: 0, reason: "Incorrect Password or Email" });
+    return res.send({ status: 0, reason: "Incorrect Password or Email" });
   }
 });
 
