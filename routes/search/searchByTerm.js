@@ -1,17 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const { searchByIdUrl, apiKey } = require("../config");
+const { searchByTermUrl } = require("../../config");
 
 router.get("/", async (req, res) => {
-  let { id } = req.body;
+  let { searchTerm } = req.body;
 
-  if (!id) {
-    return res.send({ status: 0, reason: "No id" });
+  if (!searchTerm) {
+    return res.send({ status: 0, reason: "No search term" });
   }
 
   try {
-    const { data } = await axios.get(searchByIdUrl(id, apiKey));
+    const { data } = await axios.get(searchByTermUrl(searchTerm));
     res.send({ status: 1, data: data });
   } catch (e) {
     console.log(e);

@@ -25,10 +25,14 @@ app.use("/user/updatepassword", require("./routes/accounts/updatePassword"));
 //change email
 app.use("/user/updateemail", require("./routes/accounts/updateEmail"));
 
-//
-app.use("/books/search/term", require("./routes/searchByTerm"));
+//search for book by search term
+app.use("/books/search/term", require("./routes/search/searchByTerm"));
+//search for book by id 
+app.use("/books/search/id", require("./routes/search/searchById"));
 
-app.use("/books/search/id", require("./routes/searchById"));
+//add book review
+app.use("/review/add", require("./routes/reviews/add"));
+
 
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {
