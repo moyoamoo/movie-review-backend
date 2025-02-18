@@ -28,6 +28,8 @@ app.use("/user/updateemail", require("./routes/accounts/updateEmail"));
 //
 app.use("/books/search/term", require("./routes/searchByTerm"));
 
+app.use("/books/search/id", require("./routes/searchById"));
+
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);

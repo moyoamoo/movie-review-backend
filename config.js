@@ -1,9 +1,13 @@
 const salt = process.env.SALT;
 
-const apiKey = process.env.SALT;
+const apiKey = process.env.API_KEY;
 
-const url = (searchTerm) => {
+const searchByTermUrl = (searchTerm) => {
   return `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`;
 };
 
-module.exports = { salt, apiKey, url};
+const searchByIdUrl = (id, apiKey) => {
+  return `https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`;
+};
+
+module.exports = { salt, apiKey, searchByTermUrl, searchByIdUrl };
