@@ -22,7 +22,12 @@ router.get("/", async (req, res) => {
       result.review = JSON.parse(
         Buffer.from(result.review, "base64").toString("utf8")
       );
-      reviews.push({ review: result.review, date: result.entry_date });
+      reviews.push({
+        username: result.username,
+        reviewId: result.id,
+        review: result.review,
+        date: result.entry_date,
+      });
     });
     res.send({
       status: 1,

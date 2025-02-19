@@ -34,7 +34,9 @@ app.use("/books/search/id", require("./routes/search/searchById"));
 app.use("/review/add", require("./routes/reviews/add"));
 //update exisiting book review
 app.use("/review/update", require("./routes/reviews/update"));
-
+//delete review with review id
+app.use("/review/delete", require("./routes/reviews/delete"));
+//search review by book id
 app.use("/review/search/id", require("./routes/reviews/searchById"));
 
 const PORT = process.env.PORT || 6001;

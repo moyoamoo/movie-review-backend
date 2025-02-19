@@ -14,9 +14,14 @@ const editReview = `UPDATE reviews
 const searchReviewsById = `SELECT *
                             FROM reviews
                                 WHERE reviews.book_id = ?`;
+
+const deleteReview = `DELETE FROM reviews
+                        WHERE id = ?
+                            AND username = ?`;
 module.exports = {
   addNewReview,
   searchReviews,
   editReview,
   searchReviewsById,
+  deleteReview
 };
