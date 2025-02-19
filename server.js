@@ -41,6 +41,10 @@ app.use("/review/search/id", require("./routes/reviews/searchById"));
 
 //add book rating
 app.use("/rating/add", require("./routes/ratings/add"));
+//search ratings by book id
+app.use("/rating/search", require("./routes/ratings/searchById"));
+//update rating
+app.use("/rating/update", require("./routes/ratings/update"));
 
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {

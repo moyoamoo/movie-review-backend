@@ -2,9 +2,6 @@ const connectMySQL = require("./mysql/driver");
 const { checkToken } = require("./mysql/queries/account");
 async function checkUser(req, res, next) {
   let results;
-
-  console.log(checkToken);
-
   //check if token is missing
   if (!req.headers.token) {
     return res.send({ status: 0, reason: "Token Missing" });

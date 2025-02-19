@@ -25,10 +25,8 @@ router.post("/", checkUser, async (req, res) => {
   }
 
   if (req.authUserID) {
-    //find username from user id
     let username;
     let results;
-    //find username associated with user id
 
     //check if user has left a rating for this book
     try {
@@ -43,6 +41,7 @@ router.post("/", checkUser, async (req, res) => {
       return res.send({ status: 0, reason: "Unable to search ratings" });
     }
 
+    //find username associated with user id
     try {
       results = await connectMySQL(getUsername, [req.authUserID]);
     } catch (e) {
