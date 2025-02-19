@@ -1,3 +1,4 @@
+
 const addUser = `INSERT INTO users
                   (email, username, password)
                     VALUES
@@ -33,6 +34,9 @@ const updateEmail = `UPDATE users
                         SET email = ?
                           WHERE sessions.token = ?;`;
 
+const getUsername = `SELECT username from users
+                      WHERE id = ?`;
+
 module.exports = {
   addUser,
   findUser,
@@ -42,4 +46,5 @@ module.exports = {
   deleteToken,
   updatePassword,
   updateEmail,
+  getUsername,
 };

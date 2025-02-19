@@ -1,7 +1,7 @@
 const addNewReview = `INSERT INTO reviews
-                        (user_id, book_id, review)
+                        (user_id, book_id, username, review)
                             VALUES
-                                (?, ?, ?); `;
+                                (?, ?, ?, ?); `;
 const searchReviews = `SELECT *
                         FROM reviews
                             where reviews.user_id = ?

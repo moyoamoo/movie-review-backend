@@ -1,8 +1,9 @@
 const connectMySQL = require("./mysql/driver");
 const { checkToken } = require("./mysql/queries/account");
-
 async function checkUser(req, res, next) {
   let results;
+
+  console.log(checkToken);
 
   //check if token is missing
   if (!req.headers.token) {
@@ -15,6 +16,7 @@ async function checkUser(req, res, next) {
     results = await connectMySQL(checkToken, [token]);
   } catch (e) {
     res.send({ status: 0, reason: "Invalid Token" });
+    console.log(e);
     return;
   }
 
