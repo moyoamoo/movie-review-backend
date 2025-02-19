@@ -39,6 +39,9 @@ app.use("/review/delete", require("./routes/reviews/delete"));
 //search review by book id
 app.use("/review/search/id", require("./routes/reviews/searchById"));
 
+//add book rating
+app.use("/rating/add", require("./routes/ratings/add"));
+
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);

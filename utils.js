@@ -1,4 +1,6 @@
 //create token
+
+
 function getRandom(len = 115) {
   let uniqueId = "";
   let chars =
@@ -14,5 +16,6 @@ function getRandom(len = 115) {
 
   return (uniqueId += Date.now());
 }
+
 
 module.exports = { getRandom };
