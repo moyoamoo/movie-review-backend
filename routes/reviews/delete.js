@@ -5,18 +5,14 @@ const connectMySQL = require("../../mysql/driver");
 const { deleteReview } = require("../../mysql/queries/reviews");
 
 router.delete("/", checkUser, async (req, res) => {
-  let { reviewId, username } = req.body;
+  let { reviewId } = req.body;
 
   if (!reviewId) {
     return res.send({ status: 0, reason: "No review Id" });
   }
-
-  if (!username) {
-    return res.send({ status: 0, reason: "No review Id" });
-  }
   console.log(deleteReview);
   try {
-    await connectMySQL(deleteReview, [reviewId, username]);
+    await connectMySQL(deleteReview, [reviewId, req.authUserID]);
     return res.send({ status: 1, reason: "Review deleted" });
   } catch (e) {
     console.log(e);

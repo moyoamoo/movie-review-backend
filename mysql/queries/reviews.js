@@ -17,11 +17,11 @@ const searchReviewsById = `SELECT *
 
 const deleteReview = `DELETE FROM reviews
                         WHERE id = ?
-                            AND username = ?`;
+                            AND user_id = ?`;
 module.exports = {
   addNewReview,
   searchReviews,
   editReview,
   searchReviewsById,
-  deleteReview
+  deleteReview,
 };

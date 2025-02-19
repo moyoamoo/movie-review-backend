@@ -17,9 +17,14 @@ const editRating = `UPDATE ratings
                             WHERE ratings.user_id = ?
                                 AND ratings.book_id = ?`;
 
+const deleteRating = `DELETE FROM ratings
+                                WHERE id = ?
+                                    AND user_id = ?`;
+
 module.exports = {
   addRating,
   searchRatings,
   searchRatingsById,
   editRating,
+  deleteRating,
 };

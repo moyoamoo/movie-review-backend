@@ -45,6 +45,8 @@ app.use("/rating/add", require("./routes/ratings/add"));
 app.use("/rating/search", require("./routes/ratings/searchById"));
 //update rating
 app.use("/rating/update", require("./routes/ratings/update"));
+//delete rating
+app.use("/rating/delete", require("./routes/ratings/delete"));
 
 const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {

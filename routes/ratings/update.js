@@ -28,7 +28,7 @@ router.patch("/", checkUser, async (req, res) => {
     try {
       // Try searching for the review to check if the user has already left a rating for the book
       let results = await connectMySQL(searchRatings, [req.authUserID, bookId]);
-      console.log(results);
+      let ratingId = results[0].id;
 
       if (results.length) {
         try {
@@ -37,7 +37,13 @@ router.patch("/", checkUser, async (req, res) => {
             req.authUserID,
             bookId,
           ]);
-          return res.send({ status: 1, reason: "Edited rating", rating });
+          console.log(results);
+          return res.send({
+            status: 1,
+            reason: "Edited rating",
+            rating,
+            ratingId,
+          });
         } catch (e) {
           console.log(e);
           return res.send({ status: 0, reason: "Unable to edit rating" });
