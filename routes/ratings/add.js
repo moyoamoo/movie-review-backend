@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const connectMySQL = require("../../mysql/driver");
 const { checkUser } = require("../../middleware");
-const { addRating } = require("../../mysql/queries/ratings");
+const { addRating, searchRatings } = require("../../mysql/queries/ratings");
 const { getUsername } = require("../../mysql/queries/account");
 
 router.post("/", checkUser, async (req, res) => {
@@ -25,9 +25,24 @@ router.post("/", checkUser, async (req, res) => {
   }
 
   if (req.authUserID) {
+    //find username from user id
     let username;
     let results;
     //find username associated with user id
+
+    //check if user has left a rating for this book
+    try {
+      results = await connectMySQL(searchRatings, [req.authUserID, bookId]);
+      if (results.length) {
+        return res.send({
+          status: 0,
+          reason: "User has already left a rating for this book",
+        });
+      }
+    } catch (e) {
+      return res.send({ status: 0, reason: "Unable to search ratings" });
+    }
+
     try {
       results = await connectMySQL(getUsername, [req.authUserID]);
     } catch (e) {
